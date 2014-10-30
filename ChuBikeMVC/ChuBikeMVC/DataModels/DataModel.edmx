@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DataModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PartSet" EntityType="DataModel.Part" />
+          <EntitySet Name="ImagesSet" EntityType="DataModel.Images" />
+          <EntitySet Name="PartTypesSet" EntityType="DataModel.PartTypes" />
+          <EntitySet Name="FrameSet" EntityType="DataModel.Frame" />
+          <EntitySet Name="UsersSet" EntityType="DataModel.Users" />
+          <EntitySet Name="RolesSet" EntityType="DataModel.Roles" />
+          <EntitySet Name="ManufacturerSet" EntityType="DataModel.Manufacturer" />
+          <AssociationSet Name="FramePart" Association="DataModel.FramePart">
+            <End Role="Frame" EntitySet="FrameSet" />
+            <End Role="Part" EntitySet="PartSet" />
+          </AssociationSet>
+          <AssociationSet Name="ImagesPart" Association="DataModel.ImagesPart">
+            <End Role="Images" EntitySet="ImagesSet" />
+            <End Role="Part" EntitySet="PartSet" />
+          </AssociationSet>
+          <AssociationSet Name="RolesUsers" Association="DataModel.RolesUsers">
+            <End Role="Roles" EntitySet="RolesSet" />
+            <End Role="Users" EntitySet="UsersSet" />
+          </AssociationSet>
+          <AssociationSet Name="PartPartTypes" Association="DataModel.PartPartTypes">
+            <End Role="Part" EntitySet="PartSet" />
+            <End Role="PartTypes" EntitySet="PartTypesSet" />
+          </AssociationSet>
+          <AssociationSet Name="ManufacturerPart" Association="DataModel.ManufacturerPart">
+            <End Role="Manufacturer" EntitySet="ManufacturerSet" />
+            <End Role="Part" EntitySet="PartSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Manufacturer_id" Type="String" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <Property Name="Type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Frame" Relationship="DataModel.FramePart" FromRole="Part" ToRole="Frame" />
+          <NavigationProperty Name="Images" Relationship="DataModel.ImagesPart" FromRole="Part" ToRole="Images" />
+          <NavigationProperty Name="PartTypes" Relationship="DataModel.PartPartTypes" FromRole="Part" ToRole="PartTypes" />
+          <NavigationProperty Name="Manufacturer" Relationship="DataModel.ManufacturerPart" FromRole="Part" ToRole="Manufacturer" />
+        </EntityType>
+        <EntityType Name="Frame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part_id" Type="Int32" Nullable="false" />
+          <Property Name="Lenght" Type="String" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="DataModel.FramePart" FromRole="Frame" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part_id" Type="String" Nullable="false" />
+          <Property Name="Path" Type="String" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="DataModel.ImagesPart" FromRole="Images" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="PartTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="DataModel.PartPartTypes" FromRole="PartTypes" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Role_id" Type="String" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="DataModel.RolesUsers" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="DataModel.RolesUsers" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Addres" Type="String" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="DataModel.ManufacturerPart" FromRole="Manufacturer" ToRole="Part" />
+        </EntityType>
+        <Association Name="FramePart">
+          <End Type="DataModel.Frame" Role="Frame" Multiplicity="1" />
+          <End Type="DataModel.Part" Role="Part" Multiplicity="1" />
+        </Association>
+        <Association Name="ImagesPart">
+          <End Type="DataModel.Images" Role="Images" Multiplicity="*" />
+          <End Type="DataModel.Part" Role="Part" Multiplicity="1" />
+        </Association>
+        <Association Name="RolesUsers">
+          <End Type="DataModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="DataModel.Users" Role="Users" Multiplicity="*" />
+        </Association>
+        <Association Name="PartPartTypes">
+          <End Type="DataModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="DataModel.PartTypes" Role="PartTypes" Multiplicity="*" />
+        </Association>
+        <Association Name="ManufacturerPart">
+          <End Type="DataModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+          <End Type="DataModel.Part" Role="Part" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DataModel" />
+        <Alias Key="Target" Value="DataModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="DataModelContainer" StorageEntityContainer="DataModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
