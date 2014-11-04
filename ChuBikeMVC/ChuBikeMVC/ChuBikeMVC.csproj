@@ -161,6 +161,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Bike\ManufacturersController.cs" />
+    <Compile Include="Controllers\Bike\PartsController.cs" />
+    <Compile Include="Controllers\Bike\Parts\FramesController.cs" />
+    <Compile Include="Controllers\Bike\PartTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataModels\DataModel.Designer.cs">
@@ -174,7 +178,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bike\Manufacturer.cs" />
     <Compile Include="Models\Bike\PartType.cs" />
-    <Compile Include="Models\Context\PartContext.cs" />
+    <Compile Include="Models\Context\Bike\ManufacturersDBContext.cs" />
+    <Compile Include="Models\Context\Bike\PartsDBContext.cs" />
+    <Compile Include="Models\Context\Bike\Parts\FramesDBContext.cs" />
+    <Compile Include="Models\Context\Bike\PartTypesDBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Bike\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -252,6 +259,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Manufacturers\Create.cshtml" />
+    <Content Include="Views\Manufacturers\Delete.cshtml" />
+    <Content Include="Views\Manufacturers\Details.cshtml" />
+    <Content Include="Views\Manufacturers\Edit.cshtml" />
+    <Content Include="Views\Manufacturers\Index.cshtml" />
+    <Content Include="Views\PartTypes\Create.cshtml" />
+    <Content Include="Views\PartTypes\Delete.cshtml" />
+    <Content Include="Views\PartTypes\Details.cshtml" />
+    <Content Include="Views\PartTypes\Edit.cshtml" />
+    <Content Include="Views\PartTypes\Index.cshtml" />
+    <Content Include="Views\Frames\Create.cshtml" />
+    <Content Include="Views\Frames\Delete.cshtml" />
+    <Content Include="Views\Frames\Details.cshtml" />
+    <Content Include="Views\Frames\Edit.cshtml" />
+    <Content Include="Views\Frames\Index.cshtml" />
+    <Content Include="Views\Parts\Create.cshtml" />
+    <Content Include="Views\Parts\Delete.cshtml" />
+    <Content Include="Views\Parts\Details.cshtml" />
+    <Content Include="Views\Parts\Edit.cshtml" />
+    <Content Include="Views\Parts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

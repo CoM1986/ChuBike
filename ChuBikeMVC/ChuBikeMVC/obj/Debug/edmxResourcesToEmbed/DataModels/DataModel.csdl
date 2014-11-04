@@ -45,9 +45,8 @@
   </EntityType>
   <EntityType Name="Frame">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="Part_id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Part_id" Type="Int32" Nullable="false" />
     <Property Name="Lenght" Type="String" Nullable="false" />
     <NavigationProperty Name="Part" Relationship="DataModel.FramePart" FromRole="Frame" ToRole="Part" />
@@ -111,8 +110,8 @@
     <End Type="DataModel.Users" Role="Users" Multiplicity="*" />
   </Association>
   <Association Name="PartPartTypes">
-    <End Type="DataModel.Part" Role="Part" Multiplicity="1" />
-    <End Type="DataModel.PartTypes" Role="PartTypes" Multiplicity="*" />
+    <End Type="DataModel.Part" Role="Part" Multiplicity="*" />
+    <End Type="DataModel.PartTypes" Role="PartTypes" Multiplicity="1" />
   </Association>
   <Association Name="ManufacturerPart">
     <End Type="DataModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />

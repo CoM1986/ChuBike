@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ChuBikeMVC.Models.Bike;
+using ChuBikeMVC.Models.Parts;
 
 namespace ChuBikeMVC.Models
 {
@@ -15,8 +16,10 @@ namespace ChuBikeMVC.Models
         public int ManufacturerId { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
 
-        public int TypeId { get; set; }
-        public virtual PartType PartsType { get; set; }
+        public int PartTypeId { get; set; }
+        public virtual PartType PartType { get; set; }
+
+        public virtual Frame Frame { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
     }
