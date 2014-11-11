@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Frame.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Manufacturer.Name)
         </th>
         <th>
@@ -32,9 +29,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Frame.Id)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Manufacturer.Name)
         </td>
         <td>
@@ -47,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.PartId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PartId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PartId })
         </td>
     </tr>
 }

@@ -5,11 +5,11 @@ namespace ChuBikeMVC.Models.Parts
 {
     public class Frame
     {
-        [Key, ForeignKey("Part")]
-        public int Id { get; set; }
-
+        [Key]
+        public int FrameId { get; set; }
         public double Lenght { get; set; }
-
+        [ForeignKey("Part")]
+        public int PartId { get; set; }
         public virtual Part Part { get; set; }
     }
 }

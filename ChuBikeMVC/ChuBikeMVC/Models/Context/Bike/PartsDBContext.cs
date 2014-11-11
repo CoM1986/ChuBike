@@ -14,5 +14,8 @@ namespace ChuBikeMVC.Models.Context.Bike
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<PartType> PartTypes { get; set; }
         public DbSet<Frame> Frames { get; set; }
+        public DbSet<Crank> Cranks { get; set; }
+        public DbSet<Rim> Rims { get; set; }
+        public DbSet<Steam> Steams { get; set; }
     }
 }

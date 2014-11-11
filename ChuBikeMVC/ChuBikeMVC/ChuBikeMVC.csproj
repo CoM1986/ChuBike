@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,7 +165,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Bike\ManufacturersController.cs" />
     <Compile Include="Controllers\Bike\PartsController.cs" />
-    <Compile Include="Controllers\Bike\Parts\FramesController.cs" />
+    <Compile Include="Controllers\Bike\Parts\CranksController.cs" />
     <Compile Include="Controllers\Bike\PartTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -180,7 +182,6 @@
     <Compile Include="Models\Bike\PartType.cs" />
     <Compile Include="Models\Context\Bike\ManufacturersDBContext.cs" />
     <Compile Include="Models\Context\Bike\PartsDBContext.cs" />
-    <Compile Include="Models\Context\Bike\Parts\FramesDBContext.cs" />
     <Compile Include="Models\Context\Bike\PartTypesDBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Bike\Image.cs" />
@@ -269,16 +270,16 @@
     <Content Include="Views\PartTypes\Details.cshtml" />
     <Content Include="Views\PartTypes\Edit.cshtml" />
     <Content Include="Views\PartTypes\Index.cshtml" />
-    <Content Include="Views\Frames\Create.cshtml" />
-    <Content Include="Views\Frames\Delete.cshtml" />
-    <Content Include="Views\Frames\Details.cshtml" />
-    <Content Include="Views\Frames\Edit.cshtml" />
-    <Content Include="Views\Frames\Index.cshtml" />
     <Content Include="Views\Parts\Create.cshtml" />
     <Content Include="Views\Parts\Delete.cshtml" />
     <Content Include="Views\Parts\Details.cshtml" />
     <Content Include="Views\Parts\Edit.cshtml" />
     <Content Include="Views\Parts\Index.cshtml" />
+    <Content Include="Views\Cranks\Create.cshtml" />
+    <Content Include="Views\Cranks\Delete.cshtml" />
+    <Content Include="Views\Cranks\Details.cshtml" />
+    <Content Include="Views\Cranks\Edit.cshtml" />
+    <Content Include="Views\Cranks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +320,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Включите восстановление пакетов NuGet, чтобы загрузить их. Дополнительные сведения см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

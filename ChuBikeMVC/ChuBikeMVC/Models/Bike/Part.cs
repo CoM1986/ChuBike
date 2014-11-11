@@ -9,7 +9,7 @@ namespace ChuBikeMVC.Models
 {
     public class Part
     {
-        public int Id { get; set; }
+        public int PartId { get; set; }
         public string Name { get; set; }
         public double Weight { get; set; }
 
@@ -19,7 +19,13 @@ namespace ChuBikeMVC.Models
         public int PartTypeId { get; set; }
         public virtual PartType PartType { get; set; }
 
-        public virtual Frame Frame { get; set; }
+        public virtual List<Frame> Frame { get; set; }
+
+        public virtual List<Crank> Crank { get; set; }
+
+        public virtual List<Rim> Rim { get; set; }
+
+        public virtual List<Steam> Steam { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
     }
