@@ -11,7 +11,7 @@ namespace ChuBikeMVC.Models.Bike
         {
             List<Part> PartsList = new List<Part>();
         }
-        public int Id { get; set; }
+        public int ManufacturerId { get; set; }
         public string Name { get; set; }
         public string Addres { get; set; }
 

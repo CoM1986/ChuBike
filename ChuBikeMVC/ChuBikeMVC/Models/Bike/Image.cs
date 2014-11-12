@@ -7,7 +7,7 @@ namespace ChuBikeMVC.Models
 {
     public class Image
     {
-        public int Id { get; set; }
+        public int ImageId { get; set; }
         public string Path { get; set; }
 
         public virtual Part Part { get; set; }
