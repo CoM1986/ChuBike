@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Weight)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdditionalInformation)
+        </th>
         <th></th>
     </tr>
 
@@ -39,6 +42,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdditionalInformation)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PartId }) |

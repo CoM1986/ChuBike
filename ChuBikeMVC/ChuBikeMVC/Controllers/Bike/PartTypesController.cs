@@ -47,7 +47,7 @@ namespace ChuBikeMVC.Controllers.Bike
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] PartType partType)
+        public ActionResult Create([Bind(Include = "PartTypeId,Name")] PartType partType)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace ChuBikeMVC.Controllers.Bike
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] PartType partType)
+        public ActionResult Edit([Bind(Include = "PartTypeId,Name")] PartType partType)
         {
             if (ModelState.IsValid)
             {

@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ChuBikeMVC.Models;
+using ChuBikeMVC.Models.Bike;
+using ChuBikeMVC.Models.Bike.Parts;
 using ChuBikeMVC.Models.Context.Bike;
 
 namespace ChuBikeMVC.Controllers.Bike
@@ -40,30 +42,61 @@ namespace ChuBikeMVC.Controllers.Bike
         // GET: Parts/Create
         public ActionResult Create()
         {
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name");
-            ViewBag.PartTypeId = new SelectList(db.PartTypes, "Id", "Name");
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "Name");
+            ViewBag.PartTypeId = new SelectList(db.PartTypes, "PartTypeId", "Name");
             return View();
         }
 
         // POST: Parts/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PartId,Name,Weight,ManufacturerId,PartTypeId")] Part part)
+        public ActionResult Create(FormCollection collection)
         {
-            if (ModelState.IsValid)
-            {
-                db.Parts.Add(part);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Stem obj = new Stem();
+            if (collection["PartTypeId"] == "2")
+                 obj = new Stem();
 
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.PartTypeId = new SelectList(db.PartTypes, "Id", "Name", part.PartTypeId);
-            return View(part);
+            obj.Name = collection["Name"];
+            obj.Weight = double.Parse(collection["Weight"]);
+            obj.AdditionalInformation = collection["AdditionalInformation"];
+            obj.ManufacturerId = int.Parse(collection["ManufacturerId"]);
+            obj.PartTypeId = int.Parse(collection["PartTypeId"]);
+
+            db.Stems.Add(obj);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            return View(obj);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "PartId,Name,Weight,ManufacturerId,PartTypeId")] Part part)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Parts.Add(part);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
+        //    ViewBag.PartTypeId = new SelectList(db.PartTypes, "Id", "Name", part.PartTypeId);
+        //    return View(part);
+        //}
+
+
+        public ActionResult StemToPv(int partTypeId)
+        {
+            //IEnumerable<PartType> partTypes = new List<PartType>(db.PartTypes.Select(p => p));
+            //var selectedPartTypeId = (from c in partTypes where c.Name == partTypeName select c.PartTypeId).FirstOrDefault();
+
+            //IEnumerable<Stem> allStems = new List<Stem>(db.Stems.Select(s => s));
+            //var stemInPartTypes = allStems.Where(s => s.PartTypeId == selectedPartTypeId).ToList();
+
+            //return PartialView("PartialViews/StemPv", allStems);
+            return PartialView("PartialViews/StemPv");
+        }
         // GET: Parts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -76,17 +109,17 @@ namespace ChuBikeMVC.Controllers.Bike
             {
                 return HttpNotFound();
             }
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.PartTypeId = new SelectList(db.PartTypes, "Id", "Name", part.PartTypeId);
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "Name", part.ManufacturerId);
+            ViewBag.PartTypeId = new SelectList(db.PartTypes, "PartTypeId", "Name", part.PartTypeId);
             return View(part);
         }
 
         // POST: Parts/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
-        // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PartId,Name,Weight,ManufacturerId,PartTypeId")] Part part)
+        public ActionResult Edit([Bind(Include = "PartId,Name,Weight,AdditionalInformation,ManufacturerId,PartTypeId")] Part part)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +127,8 @@ namespace ChuBikeMVC.Controllers.Bike
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "Id", "Name", part.ManufacturerId);
-            ViewBag.PartTypeId = new SelectList(db.PartTypes, "Id", "Name", part.PartTypeId);
+            ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "Name", part.ManufacturerId);
+            ViewBag.PartTypeId = new SelectList(db.PartTypes, "PartTypeId", "Name", part.PartTypeId);
             return View(part);
         }
 
